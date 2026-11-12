@@ -4,6 +4,7 @@ import re, json, sys, html
 
 import os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'src', 'Main.dc.html')
 OUT = os.path.join(ROOT, 'index.html')
 
@@ -52,38 +53,38 @@ for name in ['results', 'items', 'faqs', 'reviews']:
     V[name] = js_array(name)
 
 # ---- template ----
-body = re.search(r'<x-dc>(.*)</x-dc>', src, re.S).group(1)
-body = re.sub(r'<helmet>.*?</helmet>', '', body, flags=re.S)
+TEMPLATE = re.search(r'<x-dc>(.*)</x-dc>', src, re.S).group(1)
+TEMPLATE = re.sub(r'<helmet>.*?</helmet>', '', TEMPLATE, flags=re.S)
 
-def render_for(m):
-    lst, var, inner = m.group(1), m.group(2), m.group(3)
-    out = []
-    for i, it in enumerate(V[lst]):
-        s = inner
-        s = re.sub(r'\{\{\s*' + var + r'\.(\w+)\s*\}\}', lambda mm: html.escape(it.get(mm.group(1), '')), s)
-        s = s.replace('{{$index}}', str(i))
-        out.append(s)
-    return ''.join(out)
+def render_body(V, template=TEMPLATE, prefix=''):
+    def render_for(m):
+        lst, var, inner = m.group(1), m.group(2), m.group(3)
+        out = []
+        for i, it in enumerate(V[lst]):
+            s = inner
+            s = re.sub(r'\{\{\s*' + var + r'\.(\w+)\s*\}\}', lambda mm: html.escape(it.get(mm.group(1), '')), s)
+            s = s.replace('{{$index}}', str(i))
+            out.append(s)
+        return ''.join(out)
+    body = re.sub(r'<sc-for list="\{\{(\w+)\}\}" as="(\w+)"[^>]*>(.*?)</sc-for>', render_for, template, flags=re.S)
+    body = re.sub(r'\{\{\s*(\w+)\s*\}\}', lambda m: html.escape(str(V.get(m.group(1), ''))), body)
+    for k, v in BLOBS.items():
+        body = body.replace(k, prefix + v)
+    assert '{{' not in body, re.findall(r'\{\{[^}]*\}\}', body)[:5]
+    assert '/_blob/' not in body
+    # live open/closed status instead of a fixed 「営業中」
+    body = body.replace('font-weight: 500">営業中</span>', 'font-weight: 500" data-open>営業中</span>')
+    body = body.replace(' · 18:00 に営業終了 · 定休日なし', ' <span data-open-note>· 18:00 に営業終了</span> · 定休日なし')
+    # mark CTA links for conversion tracking
+    body = re.sub(r'<a href="tel:', '<a data-cv="tel" href="tel:', body)
+    body = re.sub(r'<a href="https://lin\.ee/', '<a data-cv="line" href="https://lin.ee/', body)
+    body = re.sub(r'<a href="https://www\.google\.com/maps/dir/', '<a data-cv="route" href="https://www.google.com/maps/dir/', body)
+    # external links open in a new tab
+    body = re.sub(r'<a (data-cv="(?:line|route)" )?href="(https://[^"]+)"', lambda m: f'<a {m.group(1) or ""}href="{m.group(2)}" target="_blank" rel="noopener"', body)
+    return body
 
-body = re.sub(r'<sc-for list="\{\{(\w+)\}\}" as="(\w+)"[^>]*>(.*?)</sc-for>', render_for, body, flags=re.S)
-body = re.sub(r'\{\{\s*(\w+)\s*\}\}', lambda m: html.escape(str(V.get(m.group(1), ''))), body)
-for k, v in BLOBS.items():
-    body = body.replace(k, v)
-assert '{{' not in body, re.findall(r'\{\{[^}]*\}\}', body)[:5]
-assert '/_blob/' not in body
-
-# live open/closed status instead of a fixed 「営業中」
-body = body.replace('font-weight: 500">営業中</span>', 'font-weight: 500" data-open>営業中</span>')
-body = body.replace(' · 18:00 に営業終了 · 定休日なし', ' <span data-open-note>· 18:00 に営業終了</span> · 定休日なし')
-
-# mark CTA links for conversion tracking
-body = re.sub(r'<a href="tel:', '<a data-cv="tel" href="tel:', body)
-body = re.sub(r'<a href="https://lin\.ee/', '<a data-cv="line" href="https://lin.ee/', body)
-body = re.sub(r'<a href="https://www\.google\.com/maps/dir/', '<a data-cv="route" href="https://www.google.com/maps/dir/', body)
-# external links open in a new tab
-body = re.sub(r'<a (data-cv="(?:line|route)" )?href="(https://[^"]+)"', lambda m: f'<a {m.group(1) or ""}href="{m.group(2)}" target="_blank" rel="noopener"', body)
-
-title = '高崎市の金・ブランド品・時計買取｜買取専門店さすがや高崎飯塚店'
+BASE_URL = 'https://gyoumu-jpg.github.io/sasugaya-takasaki/'
+title = '他店に負けない高価買取に挑戦中｜高崎市の金・ブランド品・時計買取 さすがや高崎飯塚店'
 desc = ('高崎市飯塚町、コメダ珈琲 高崎飯塚店の向かいの買取専門店。金・プラチナ・ブランド品・腕時計を査定無料でその場で現金化。'
         '査定だけでもOK、断っても無料。駐車場6台、定休日なし、群馬県内全域へ出張買取。')
 
@@ -123,7 +124,8 @@ gtag('config', '{AW_ID}');
 }})();
 </script>'''
 
-page = f'''<!doctype html>
+def make_page(body, title, desc, url):
+    return f'''<!doctype html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
@@ -133,9 +135,9 @@ page = f'''<!doctype html>
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://gyoumu-jpg.github.io/sasugaya-takasaki/img/hero.jpg">
-<meta property="og:url" content="https://gyoumu-jpg.github.io/sasugaya-takasaki/">
-<link rel="canonical" href="https://gyoumu-jpg.github.io/sasugaya-takasaki/">
+<meta property="og:image" content="{BASE_URL}img/hero.jpg">
+<meta property="og:url" content="{url}">
+<link rel="canonical" href="{url}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
@@ -183,5 +185,13 @@ img{{max-width:100%}}
 </body>
 </html>
 '''
-open(OUT, 'w', encoding='utf-8').write(page)
-print('wrote', OUT, len(page), 'bytes; gtag:', bool(AW_ID))
+
+import variants
+pages = [('', V, TEMPLATE, title, desc)] + variants.build(V, TEMPLATE)
+for sub, v, tpl, t, d in pages:
+    prefix = '../' if sub else ''
+    out = os.path.join(ROOT, sub, 'index.html')
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    page = make_page(render_body(v, tpl, prefix), t, d, BASE_URL + (sub + '/' if sub else ''))
+    open(out, 'w', encoding='utf-8').write(page)
+    print('wrote', out, len(page), 'bytes; gtag:', bool(AW_ID))
