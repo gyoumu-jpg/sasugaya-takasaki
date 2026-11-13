@@ -97,8 +97,7 @@ def gold(V, tpl):
     head, blocks = split(tpl)
     b = dict(blocks)
     b['カバー写真'] = set_hero(b['カバー写真'], title='金・銀・プラチナ<br>高価買取',
-                            thumbs=thumb(R1, '金貨＆銀貨の買取実績') + thumb(R2, '喜平ネックレスの買取実績') + thumb(R3, '純銀小判の買取実績') + '<img src="../img/hq-silvercoin.jpg" alt="銀貨（イメージ）" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 2px solid #e9c46a; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.5)">' + thumb(R5, 'プラチナのバングルとリングの買取実績'),
-                            perk3=('壊れて<br>いてもOK', '重さで査定'))
+                            thumbs=thumb(R1, '金貨＆銀貨の買取実績') + thumb(R2, '喜平ネックレスの買取実績') + thumb(R3, '純銀小判の買取実績') + '<img src="../img/hq-silvercoin.jpg" alt="銀貨（イメージ）" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 2px solid #e9c46a; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.5)">' + thumb(R5, 'プラチナのバングルとリングの買取実績'))
     b['カバー写真'] = rep(b['カバー写真'], '予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで',
                          '※写真の一部はイメージです。予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで')
     b['カバー写真'] = rep(b['カバー写真'], '<div data-hero-thumbs style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">',
@@ -148,7 +147,7 @@ def brand(V, tpl):
     badge = ('<span style="display: flex; flex-direction: column; align-items: flex-end; flex: none; border: 1px solid #e9c46a; color: #f7e3a6; padding: 3px 8px; border-radius: 8px; line-height: 1.25">'
              '<span style="font-size: 10px; font-weight: 700">Googleクチコミ</span><span style="font-size: 15px; font-weight: 700"><span style="color: #fbbc04">★</span>{{rating}}</span></span>')
     b['カバー写真'] = set_hero(b['カバー写真'], title='ブランド品・腕時計<br>高価買取', thumbs=thumb(R4, 'シャネルの財布の買取実績') + names,
-                            badge=badge, perk3=('箱・保証書<br>なしもOK', 'ご相談ください'))
+                            badge=badge)
     b['カバー写真'] = rep(b['カバー写真'], '予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで',
                          '※写真の一部はイメージです。予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで')
     b['電話の訴求'] = rep(b['電話の訴求'], PHONE_EXAMPLE, '「ヴィトンの長財布」「シャネルのバッグ」など、ブランド名と品物を伝えるだけ。')
