@@ -30,6 +30,10 @@ BLOBS = {
     '/_blob/42778c475582aac16dfa0b980ee1de58': 'img/r4.jpg',
     '/_blob/c6e314b32bc74917dc7f993a769d7822': 'img/r5.jpg',
     '/_blob/38e5b70be7ac23ba1a724a6cd27d0e9a': 'img/r6.jpg',
+    '/_blob/hq-hermes': 'img/hq-hermes.jpg',
+    '/_blob/hq-vuitton': 'img/hq-vuitton.jpg',
+    '/_blob/hq-rolex': 'img/hq-rolex.jpg',
+    '/_blob/hq-silvercoin': 'img/hq-silvercoin.jpg',
 }
 
 # ---- data (mirrors renderVals) ----
@@ -84,7 +88,7 @@ def render_body(V, template=TEMPLATE, prefix=''):
     return body
 
 BASE_URL = 'https://gyoumu-jpg.github.io/sasugaya-takasaki/'
-title = '金・ブランド品 高価買取｜高崎市の買取専門店さすがや高崎飯塚店'
+title = 'ブランド品・金 高価買取｜高崎市の買取専門店さすがや高崎飯塚店'
 desc = ('高崎市飯塚町、コメダ珈琲 高崎飯塚店の向かいの買取専門店。金・プラチナ・ブランド品・腕時計を査定無料でその場で現金化。'
         '査定だけでもOK、断っても無料。駐車場6台、定休日なし、群馬県内全域へ出張買取。')
 
