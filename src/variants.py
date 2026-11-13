@@ -125,12 +125,25 @@ def brand(V, tpl):
     ]
     head, blocks = split(tpl)
     b = dict(blocks)
-    names = ''.join(f'<span style="display: flex; align-items: center; justify-content: center; text-align: center; aspect-ratio: 1 / 1; border-radius: 10px; border: 1px solid #e9c46a; background: rgba(255,255,255,0.04); font-family: \'Noto Serif JP\', serif; font-size: 12px; font-weight: 700; color: #f7e3a6; line-height: 1.3">{n}</span>'
-                    for n in ['エルメス', 'ルイ・<br>ヴィトン', 'ロレックス'])
+    G = 'fill="none" stroke="#f3cf73" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"'
+    icons = {
+        # 上部ハンドルのハンドバッグ（汎用の形）
+        'bag': f'<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><path {G} d="M17 17v-3a7 7 0 0 1 14 0v3"/><path {G} d="M9 17h30l-2 22a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3z"/><path {G} d="M19 24h10"/></svg>',
+        # 長財布
+        'wallet': f'<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><rect {G} x="6" y="13" width="36" height="22" rx="3"/><path {G} d="M6 21h36"/><circle {G} cx="35" cy="28" r="2.2"/></svg>',
+        # 腕時計
+        'watch': f'<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><path {G} d="M18 6h12l1 9H17zM17 33h14l-1 9H18z"/><circle {G} cx="24" cy="24" r="10"/><path {G} d="M24 18v6l4 3"/><path {G} d="M34.5 22.5h2"/></svg>',
+    }
+    tile = lambda ic, n: ('<span style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; aspect-ratio: 1 / 1; '
+                          'border-radius: 10px; border: 1px solid #e9c46a; background: radial-gradient(circle at 50% 35%, rgba(243,207,115,0.18), rgba(255,255,255,0.02) 70%)">'
+                          f'{icons[ic]}<span style="font-family: \'Noto Serif JP\', serif; font-size: 11px; font-weight: 700; color: #f7e3a6; line-height: 1.2; text-align: center">{n}</span></span>')
+    names = tile('bag', 'エルメス') + tile('wallet', 'ルイ・<br>ヴィトン') + tile('watch', 'ロレックス')
     badge = ('<span style="display: flex; flex-direction: column; align-items: flex-end; flex: none; border: 1px solid #e9c46a; color: #f7e3a6; padding: 3px 8px; border-radius: 8px; line-height: 1.25">'
              '<span style="font-size: 10px; font-weight: 700">Googleクチコミ</span><span style="font-size: 15px; font-weight: 700"><span style="color: #fbbc04">★</span>{{rating}}</span></span>')
     b['カバー写真'] = set_hero(b['カバー写真'], title='ブランド品・腕時計<br>高価買取', thumbs=thumb(R4, 'シャネルの財布の買取実績') + names,
                             badge=badge, perk3=('箱・保証書<br>なしもOK', 'ご相談ください'))
+    b['カバー写真'] = rep(b['カバー写真'], '予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで',
+                         '※ブランド名の絵はイメージです。予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで')
     b['電話の訴求'] = rep(b['電話の訴求'], PHONE_EXAMPLE, '「ヴィトンの長財布」「シャネルのバッグ」など、ブランド名と品物を伝えるだけ。')
     brands = [('エルメス', 'バッグ・財布・小物'), ('ルイ・ヴィトン', 'バッグ・財布・小物'), ('シャネル', 'バッグ・財布・アクセサリー'),
               ('ロレックス', '腕時計'), ('オメガ', '腕時計'), ('グランドセイコー', '腕時計')]
