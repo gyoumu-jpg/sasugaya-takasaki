@@ -163,9 +163,10 @@ a{color:#1a73e8}a:hover{color:#174ea6}
 <span style="font-size: 12px; color: #5f6368">{{rateDate}} · 1gあたり（税込）</span>
 </div>
 <span style="font-size: 12px; color: #5f6368; margin-top: -4px">参考：田中貴金属の地金 店頭買取価格（毎日自動更新）</span>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
-<div style="border: 1px solid #dadce0; border-radius: 12px; padding: 12px 14px"><div style="font-size: 13px; color: #5f6368">金（K24）</div><div style="font-size: 22px; font-weight: 700; color: #8a6414">{{goldRate}}</div></div>
-<div style="border: 1px solid #dadce0; border-radius: 12px; padding: 12px 14px"><div style="font-size: 13px; color: #5f6368">プラチナ（Pt1000）</div><div style="font-size: 22px; font-weight: 700; color: #3c4043">{{ptRate}}</div></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<div style="border: 1px solid #dadce0; border-radius: 12px; padding: 10px 10px"><div style="font-size: 13px; color: #5f6368">金（K24）</div><div style="font-size: 19px; font-weight: 700; color: #8a6414">{{goldRate}}</div></div>
+<div style="border: 1px solid #dadce0; border-radius: 12px; padding: 10px 10px"><div style="font-size: 13px; color: #5f6368">プラチナ（Pt1000）</div><div style="font-size: 19px; font-weight: 700; color: #3c4043">{{ptRate}}</div></div>
+<div style="border: 1px solid #dadce0; border-radius: 12px; padding: 10px 10px"><div style="font-size: 13px; color: #5f6368">銀（Sv1000）</div><div style="font-size: 19px; font-weight: 700; color: #3c4043">{{svRate}}</div></div>
 </div>
 <div style="background: #fff7e0; border: 1px solid #f1d38a; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px">
 <span style="font-size: 16px; font-weight: 700; color: #6b4a07">金は3年前の2倍以上。今が売りどきです</span>
@@ -173,10 +174,10 @@ a{color:#1a73e8}a:hover{color:#174ea6}
 <span style="font-size: 13px; color: #3c4043">引き出しに眠っている指輪やネックレスも、思った以上の金額になるかもしれません。</span>
 <span style="font-size: 11px; color: #5f6368">※2023年1月の金価格（田中貴金属・小売平均）は1g約8,800円。純金5gは上記の相場での計算例です。品位（K18など）や状態で変わります。</span>
 </div>
-<div data-calc data-gold="{{goldRate}}" data-pt="{{ptRate}}" style="border: 1px solid #dadce0; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
-<span style="font-size: 16px; font-weight: 700">お手持ちの金・プラチナ、いくらくらい？</span>
+<div data-calc data-gold="{{goldRate}}" data-pt="{{ptRate}}" data-sv="{{svRate}}" style="border: 1px solid #dadce0; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 16px; font-weight: 700">お手持ちの金・銀・プラチナ、いくらくらい？</span>
 <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px">
-<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5f6368">刻印（品位）<select data-calc-purity style="min-height: 44px; font-size: 16px; border: 1px solid #dadce0; border-radius: 8px; padding: 0 8px; background: #ffffff; color: #202124"><option value="g:1">K24（純金）</option><option value="g:0.916">K22</option><option value="g:0.75" selected>K18</option><option value="g:0.585">K14</option><option value="g:0.417">K10</option><option value="p:1">Pt1000</option><option value="p:0.9">Pt900</option><option value="p:0.85">Pt850</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5f6368">刻印（品位）<select data-calc-purity style="min-height: 44px; font-size: 16px; border: 1px solid #dadce0; border-radius: 8px; padding: 0 8px; background: #ffffff; color: #202124"><option value="g:1">K24（純金）</option><option value="g:0.916">K22</option><option value="g:0.75" selected>K18</option><option value="g:0.585">K14</option><option value="g:0.417">K10</option><option value="p:1">Pt1000</option><option value="p:0.9">Pt900</option><option value="p:0.85">Pt850</option><option value="s:1">純銀（Sv1000）</option><option value="s:0.925">Sv925</option></select></label>
 <label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5f6368">重さ（g）<input data-calc-gram type="number" inputmode="decimal" min="0" step="0.1" value="10" style="min-height: 44px; font-size: 16px; border: 1px solid #dadce0; border-radius: 8px; padding: 0 10px; box-sizing: border-box; width: 100%; color: #202124"></label>
 </div>
 <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; background: #f8f9fa; border-radius: 10px; padding: 10px 12px"><span style="font-size: 13px; color: #5f6368">相場から計算した目安</span><strong data-calc-out style="font-size: 22px; color: #c8285e">約0円</strong></div>
@@ -287,7 +288,7 @@ a{color:#1a73e8}a:hover{color:#174ea6}
 </main>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"lineUrl":{"editor":"text","default":"#line"},"goldRate":{"editor":"text","default":"22,109円"},"ptRate":{"editor":"text","default":"8,431円"},"rateDate":{"editor":"text","default":"11月12日更新"},"parking":{"editor":"text","default":"駐車場6台完備"},"rating":{"editor":"text","default":"5.0"},"reviewCount":{"editor":"text","default":"25"},"license":{"editor":"text","default":"第421032026072号"},"$preview":{"width":1280,"height":3400}}'>
+<script type="text/x-dc" data-dc-script data-props='{"lineUrl":{"editor":"text","default":"#line"},"goldRate":{"editor":"text","default":"22,109円"},"ptRate":{"editor":"text","default":"8,431円"},"svRate":{"editor":"text","default":"272.58円"},"rateDate":{"editor":"text","default":"11月12日更新"},"parking":{"editor":"text","default":"駐車場6台完備"},"rating":{"editor":"text","default":"5.0"},"reviewCount":{"editor":"text","default":"25"},"license":{"editor":"text","default":"第421032026072号"},"$preview":{"width":1280,"height":3400}}'>
 class Component extends DCLogic {
   renderVals() {
     return {
@@ -295,6 +296,7 @@ class Component extends DCLogic {
       goldRate: this.props.goldRate ?? '22,109円',
       fiveGram: (() => { const n = parseInt(String(this.props.goldRate ?? '22,109円').replace(/[^0-9]/g, ''), 10) || 0; return '約' + (Math.round(n * 5 / 1000) / 10).toFixed(1) + '万円'; })(),
       ptRate: this.props.ptRate ?? '8,431円',
+      svRate: this.props.svRate ?? '272.58円',
       rateDate: this.props.rateDate ?? '11月12日更新',
       parking: this.props.parking ?? '駐車場6台完備',
       rating: this.props.rating ?? '5.0',

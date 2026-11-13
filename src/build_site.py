@@ -171,12 +171,12 @@ img{{max-width:100%}}
   // 金・プラチナの目安額（参考相場 × 純度 × 重さ）
   var box = document.querySelector('[data-calc]');
   if (!box) return;
-  var num = function (t) {{ return parseInt(String(t).replace(/[^0-9]/g, ''), 10) || 0; }};
-  var rate = {{ g: num(box.getAttribute('data-gold')), p: num(box.getAttribute('data-pt')) }};
+  var num = function (t) {{ return parseFloat(String(t).replace(/[^0-9.]/g, '')) || 0; }};
+  var rate = {{ g: num(box.getAttribute('data-gold')), p: num(box.getAttribute('data-pt')), s: num(box.getAttribute('data-sv')) }};
   var sel = box.querySelector('[data-calc-purity]'), gram = box.querySelector('[data-calc-gram]'), out = box.querySelector('[data-calc-out]');
   function update() {{
     var v = sel.value.split(':'), g = parseFloat(gram.value) || 0;
-    var yen = Math.floor(rate[v[0]] * parseFloat(v[1]) * g / 100) * 100;
+    var yen = Math.floor(rate[v[0]] * parseFloat(v[1]) * g / 10) * 10;
     out.textContent = '約' + yen.toLocaleString('ja-JP') + '円';
   }}
   sel.addEventListener('change', update); gram.addEventListener('input', update); update();
