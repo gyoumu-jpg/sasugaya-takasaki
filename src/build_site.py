@@ -168,6 +168,20 @@ img{{max-width:100%}}
 </script>
 <script>
 (function () {{
+  // 期間限定キャンペーン：終了日（日本時間）を過ぎたら隠し、通常の文言に戻す
+  var jst = new Date(Date.now() + 9 * 3600 * 1000 + new Date().getTimezoneOffset() * 60000);
+  var today = jst.getFullYear() * 10000 + (jst.getMonth() + 1) * 100 + jst.getDate();
+  var box = document.querySelector('[data-campaign-until]');
+  if (!box) return;
+  var until = parseInt(box.getAttribute('data-campaign-until').replace(/-/g, ''), 10);
+  if (today <= until) return;
+  box.hidden = true;
+  document.querySelectorAll('[data-campaign-only]').forEach(function (el) {{ el.hidden = true; }});
+  document.querySelectorAll('[data-campaign-alt]').forEach(function (el) {{ el.hidden = false; }});
+}})();
+</script>
+<script>
+(function () {{
   // 金・プラチナの目安額（参考相場 × 純度 × 重さ）
   var box = document.querySelector('[data-calc]');
   if (!box) return;
