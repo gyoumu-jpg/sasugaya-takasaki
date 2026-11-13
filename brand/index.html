@@ -14,9 +14,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@700;900&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#efe9dc}
+body{margin:0;background:#1a1206}
 a{color:#8a5f10}a:hover{color:#6b4a07}
 img{max-width:100%}
+/* 下の部分：白地に金の細線。見出しは明朝体でトップとそろえる */
+main{background:#ffffff !important;box-shadow:none !important;color:#2b2418}
+main > section{border-bottom:none !important;padding:32px 22px !important}
+main > section + section{border-top:1px solid #eadfc8}
+main > section h2{font-family:'Noto Serif JP',serif !important;font-size:22px !important;font-weight:700 !important;color:#2a1d08;letter-spacing:.04em;line-height:1.4}
+main > section h2::after{content:"";display:block;width:32px;height:2px;margin-top:10px;background:linear-gradient(90deg,#d4a73c,#f3dca0)}
+main h1{font-family:'Noto Serif JP',serif !important;font-weight:700 !important;font-size:22px !important;color:#2a1d08}
+main p,main details p{font-size:15px !important;line-height:1.85 !important}
+main summary{font-size:16px !important;padding:6px 0}
+nav[aria-label="ページ内メニュー"]{display:none !important}
+#reviews,#items{background:#fbf8f1}
+main > section > div[style*="border-radius: 12px"],main details{border-color:#eadfc8 !important}
+nav[aria-label="お店へのアクション"]{border-bottom:none !important;padding-bottom:22px !important}
+nav[aria-label="お問い合わせ"]{background:#120c03 !important;border-top:1px solid #6b4a12 !important}
+nav[aria-label="お問い合わせ"] a:not([data-cv="tel"]){background:transparent !important;border:1px solid #b8862b !important;color:#f3dca0 !important}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "買取専門店 さすがや 高崎飯塚店", "image": "https://gyoumu-jpg.github.io/sasugaya-takasaki/img/hero.jpg", "url": "https://gyoumu-jpg.github.io/sasugaya-takasaki/", "telephone": "+81-27-364-1619", "address": {"@type": "PostalAddress", "postalCode": "370-0069", "addressRegion": "群馬県", "addressLocality": "高崎市", "streetAddress": "飯塚町431-5 上原貸店舗B号室", "addressCountry": "JP"}, "geo": {"@type": "GeoCoordinates", "latitude": 36.3414316, "longitude": 139.0083548}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "10:00", "closes": "18:00"}], "areaServed": ["高崎市", "前橋市", "藤岡市", "安中市", "富岡市", "甘楽町"], "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "25"}}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18407097518"></script>
@@ -129,7 +144,7 @@ gtag('config', 'AW-18407097518');
 <img src="../img/r4.jpg" alt="マトラッセ キャビアスキンウォレット" style="width: 100%; height: 140px; object-fit: cover; display: block; margin-bottom: 6px">
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">シャネル</span>
 <span style="font-size: 14px; font-weight: 500; line-height: 1.45; min-height: 40px; padding: 0 12px">マトラッセ キャビアスキンウォレット</span>
-<span style="font-size: 18px; font-weight: 700; color: #c8285e; padding: 0 12px">220,000円</span>
+<span style="font-size: 18px; font-weight: 700; color: #8f1d2c; padding: 0 12px">220,000円</span>
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">8月30日 買取</span>
 </div>
 
@@ -137,7 +152,7 @@ gtag('config', 'AW-18407097518');
 <img src="../img/r1.jpg" alt="金貨＆銀貨" style="width: 100%; height: 140px; object-fit: cover; display: block; margin-bottom: 6px">
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">記念コイン</span>
 <span style="font-size: 14px; font-weight: 500; line-height: 1.45; min-height: 40px; padding: 0 12px">金貨＆銀貨</span>
-<span style="font-size: 18px; font-weight: 700; color: #c8285e; padding: 0 12px">780,000円</span>
+<span style="font-size: 18px; font-weight: 700; color: #8f1d2c; padding: 0 12px">780,000円</span>
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">10月30日 買取</span>
 </div>
 
@@ -145,7 +160,7 @@ gtag('config', 'AW-18407097518');
 <img src="../img/r2.jpg" alt="喜平ネックレス" style="width: 100%; height: 140px; object-fit: cover; display: block; margin-bottom: 6px">
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">喜平</span>
 <span style="font-size: 14px; font-weight: 500; line-height: 1.45; min-height: 40px; padding: 0 12px">喜平ネックレス</span>
-<span style="font-size: 18px; font-weight: 700; color: #c8285e; padding: 0 12px">520,000円</span>
+<span style="font-size: 18px; font-weight: 700; color: #8f1d2c; padding: 0 12px">520,000円</span>
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">8月22日 買取</span>
 </div>
 
@@ -153,7 +168,7 @@ gtag('config', 'AW-18407097518');
 <img src="../img/r3.jpg" alt="純銀小判" style="width: 100%; height: 140px; object-fit: cover; display: block; margin-bottom: 6px">
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">記念コイン</span>
 <span style="font-size: 14px; font-weight: 500; line-height: 1.45; min-height: 40px; padding: 0 12px">純銀小判</span>
-<span style="font-size: 18px; font-weight: 700; color: #c8285e; padding: 0 12px">363,500円</span>
+<span style="font-size: 18px; font-weight: 700; color: #8f1d2c; padding: 0 12px">363,500円</span>
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">8月27日 買取</span>
 </div>
 
@@ -161,7 +176,7 @@ gtag('config', 'AW-18407097518');
 <img src="../img/r5.jpg" alt="バングル＆リング（Pt）" style="width: 100%; height: 140px; object-fit: cover; display: block; margin-bottom: 6px">
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">金・プラチナ</span>
 <span style="font-size: 14px; font-weight: 500; line-height: 1.45; min-height: 40px; padding: 0 12px">バングル＆リング（Pt）</span>
-<span style="font-size: 18px; font-weight: 700; color: #c8285e; padding: 0 12px">133,000円</span>
+<span style="font-size: 18px; font-weight: 700; color: #8f1d2c; padding: 0 12px">133,000円</span>
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">8月4日 買取</span>
 </div>
 
@@ -169,7 +184,7 @@ gtag('config', 'AW-18407097518');
 <img src="../img/r6.jpg" alt="眠っていたアクセサリー" style="width: 100%; height: 140px; object-fit: cover; display: block; margin-bottom: 6px">
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">金・プラチナ</span>
 <span style="font-size: 14px; font-weight: 500; line-height: 1.45; min-height: 40px; padding: 0 12px">眠っていたアクセサリー</span>
-<span style="font-size: 18px; font-weight: 700; color: #c8285e; padding: 0 12px">100,000円</span>
+<span style="font-size: 18px; font-weight: 700; color: #8f1d2c; padding: 0 12px">100,000円</span>
 <span style="font-size: 12px; color: #5f6368; padding: 0 12px">8月17日 買取</span>
 </div>
 
@@ -323,19 +338,6 @@ gtag('config', 'AW-18407097518');
 <div style="display: flex; gap: 14px; align-items: flex-start"><img src="../img/interior1.jpg" alt="査定カウンター" style="width: 72px; height: 72px; object-fit: cover; border-radius: 8px; flex: none"><div><div style="font-weight: 500">LINE査定</div><div style="font-size: 13px; color: #5f6368">写真を送るだけで、おおよその金額をお知らせします。</div></div></div>
 </section>
 
-<!-- 写真 -->
-<section style="padding: 16px 24px; border-bottom: 1px solid #dadce0; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 500">写真</h2>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px">
-<img src="../img/hero.jpg" alt="外観" style="width: 100%; height: 110px; object-fit: cover; border-radius: 6px">
-<img src="../img/parking.jpg" alt="入口と駐車場" style="width: 100%; height: 110px; object-fit: cover; border-radius: 6px">
-<img src="../img/interior1.jpg" alt="店内" style="width: 100%; height: 110px; object-fit: cover; border-radius: 6px">
-<img src="../img/interior2.jpg" alt="店内" style="width: 100%; height: 110px; object-fit: cover; border-radius: 6px">
-<img src="../img/staff1.jpg" alt="スタッフ" style="width: 100%; height: 110px; object-fit: cover; border-radius: 6px">
-<img src="../img/staff2.jpg" alt="スタッフ" style="width: 100%; height: 110px; object-fit: cover; border-radius: 6px">
-</div>
-</section>
-
 <!-- 質問と回答 -->
 <section id="faq" style="padding: 16px 24px; border-bottom: 1px solid #dadce0; display: flex; flex-direction: column; gap: 8px">
 <h2 style="margin: 0 0 4px; font-size: 18px; font-weight: 500">質問と回答</h2>
@@ -390,7 +392,7 @@ gtag('config', 'AW-18407097518');
 </div>
 
 <div style="border-top: 1px solid #f1f3f4; padding-top: 12px; display: flex; flex-direction: column; gap: 4px">
-<div style="display: flex; align-items: center; gap: 8px"><span style="width: 32px; height: 32px; border-radius: 50%; background: #c8285e; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500">S</span><span style="font-size: 14px; font-weight: 500">S様</span></div>
+<div style="display: flex; align-items: center; gap: 8px"><span style="width: 32px; height: 32px; border-radius: 50%; background: #8f1d2c; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500">S</span><span style="font-size: 14px; font-weight: 500">S様</span></div>
 <div style="display: flex; align-items: center; gap: 8px"><span style="color: #fbbc04; font-size: 13px; letter-spacing: 1px" aria-label="星5つ">★★★★★</span><span style="font-size: 12px; color: #5f6368">Googleのクチコミ</span></div>
 <p style="margin: 0; font-size: 14px; line-height: 1.6">他店では値段の付かなかったものも買い取ってもらえて助かりました。</p>
 <div style="margin-top: 4px; padding: 8px 12px; border-left: 3px solid #dadce0; background: #f8f9fa; border-radius: 0 8px 8px 0"><div style="font-size: 12px; font-weight: 500; color: #5f6368">お店からの返信</div><div style="font-size: 13px; line-height: 1.6; color: #3c4043">お片付けで出てきたお品物、またご不要の物がございましたら拝見させてください！</div></div>
@@ -421,7 +423,7 @@ gtag('config', 'AW-18407097518');
 </div>
 <div style="background: #fff7e0; border: 1px solid #f1d38a; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px">
 <span style="font-size: 16px; font-weight: 700; color: #6b4a07">金は3年前の2倍以上。今が売りどきです</span>
-<span style="font-size: 14px; color: #3c4043">純金5gなら、本日の相場で<strong style="color: #c8285e; font-size: 18px">約11.1万円</strong></span>
+<span style="font-size: 14px; color: #3c4043">純金5gなら、本日の相場で<strong style="color: #8f1d2c; font-size: 18px">約11.1万円</strong></span>
 <span style="font-size: 13px; color: #3c4043">引き出しに眠っている指輪やネックレスも、思った以上の金額になるかもしれません。</span>
 <span style="font-size: 11px; color: #5f6368">※2023年1月の金価格（田中貴金属・小売平均）は1g約8,800円。純金5gは上記の相場での計算例です。品位（K18など）や状態で変わります。</span>
 </div>
@@ -431,7 +433,7 @@ gtag('config', 'AW-18407097518');
 <label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5f6368">刻印（品位）<select data-calc-purity style="min-height: 44px; font-size: 16px; border: 1px solid #dadce0; border-radius: 8px; padding: 0 8px; background: #ffffff; color: #202124"><option value="g:1">K24（純金）</option><option value="g:0.916">K22</option><option value="g:0.75" selected>K18</option><option value="g:0.585">K14</option><option value="g:0.417">K10</option><option value="p:1">Pt1000</option><option value="p:0.9">Pt900</option><option value="p:0.85">Pt850</option><option value="s:1">純銀（Sv1000）</option><option value="s:0.925">Sv925</option></select></label>
 <label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5f6368">重さ（g）<input data-calc-gram type="number" inputmode="decimal" min="0" step="0.1" value="10" style="min-height: 44px; font-size: 16px; border: 1px solid #dadce0; border-radius: 8px; padding: 0 10px; box-sizing: border-box; width: 100%; color: #202124"></label>
 </div>
-<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; background: #f8f9fa; border-radius: 10px; padding: 10px 12px"><span style="font-size: 13px; color: #5f6368">相場から計算した目安</span><strong data-calc-out style="font-size: 22px; color: #c8285e">約0円</strong></div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; background: #f8f9fa; border-radius: 10px; padding: 10px 12px"><span style="font-size: 13px; color: #5f6368">相場から計算した目安</span><strong data-calc-out style="font-size: 22px; color: #8f1d2c">約0円</strong></div>
 <span style="font-size: 11px; color: #5f6368">※上の参考相場×純度×重さで計算した目安で、当店の買取価格ではありません。実際の金額は査定で決まり、品物の状態などで変わります。</span>
 <a data-cv="tel" href="tel:0273641619" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 999px; background: linear-gradient(180deg, #f7dd8c, #d4a73c); color: #3b2604; text-decoration: none; font-size: 15px; font-weight: 700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>正確な金額を電話で聞く（無料）</a>
 </div>

@@ -88,6 +88,7 @@ def render_body(V, template=TEMPLATE, prefix=''):
         ('stroke="#1a73e8"', 'stroke="#b8862b"'),
         ('#e8f0fe', '#fbf3e0'),
         ('#174ea6', '#6b4a07'),
+        ('#c8285e', '#8f1d2c'),
         ('border: 1px solid #dadce0; color: #8a5f10', 'border: 1px solid #d9c08a; color: #8a5f10'),
     ]:
         body = body.replace(a, b2)
@@ -157,9 +158,24 @@ def make_page(body, title, desc, url):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@700;900&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
-body{{margin:0;background:#efe9dc}}
+body{{margin:0;background:#1a1206}}
 a{{color:#8a5f10}}a:hover{{color:#6b4a07}}
 img{{max-width:100%}}
+/* 下の部分：白地に金の細線。見出しは明朝体でトップとそろえる */
+main{{background:#ffffff !important;box-shadow:none !important;color:#2b2418}}
+main > section{{border-bottom:none !important;padding:32px 22px !important}}
+main > section + section{{border-top:1px solid #eadfc8}}
+main > section h2{{font-family:'Noto Serif JP',serif !important;font-size:22px !important;font-weight:700 !important;color:#2a1d08;letter-spacing:.04em;line-height:1.4}}
+main > section h2::after{{content:"";display:block;width:32px;height:2px;margin-top:10px;background:linear-gradient(90deg,#d4a73c,#f3dca0)}}
+main h1{{font-family:'Noto Serif JP',serif !important;font-weight:700 !important;font-size:22px !important;color:#2a1d08}}
+main p,main details p{{font-size:15px !important;line-height:1.85 !important}}
+main summary{{font-size:16px !important;padding:6px 0}}
+nav[aria-label="ページ内メニュー"]{{display:none !important}}
+#reviews,#items{{background:#fbf8f1}}
+main > section > div[style*="border-radius: 12px"],main details{{border-color:#eadfc8 !important}}
+nav[aria-label="お店へのアクション"]{{border-bottom:none !important;padding-bottom:22px !important}}
+nav[aria-label="お問い合わせ"]{{background:#120c03 !important;border-top:1px solid #6b4a12 !important}}
+nav[aria-label="お問い合わせ"] a:not([data-cv="tel"]){{background:transparent !important;border:1px solid #b8862b !important;color:#f3dca0 !important}}
 </style>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 {gtag}
