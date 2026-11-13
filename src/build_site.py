@@ -84,7 +84,7 @@ def render_body(V, template=TEMPLATE, prefix=''):
     return body
 
 BASE_URL = 'https://gyoumu-jpg.github.io/sasugaya-takasaki/'
-title = '他店に負けない高価買取に挑戦中｜高崎市の金・ブランド品・時計買取 さすがや高崎飯塚店'
+title = '金・ブランド品 高価買取｜高崎市の買取専門店さすがや高崎飯塚店'
 desc = ('高崎市飯塚町、コメダ珈琲 高崎飯塚店の向かいの買取専門店。金・プラチナ・ブランド品・腕時計を査定無料でその場で現金化。'
         '査定だけでもOK、断っても無料。駐車場6台、定休日なし、群馬県内全域へ出張買取。')
 
@@ -139,7 +139,7 @@ def make_page(body, title, desc, url):
 <meta property="og:url" content="{url}">
 <link rel="canonical" href="{url}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@700;900&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
 body{{margin:0;background:#f1f3f4}}
 a{{color:#1a73e8}}a:hover{{color:#174ea6}}

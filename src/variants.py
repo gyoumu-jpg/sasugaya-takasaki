@@ -54,8 +54,33 @@ def okish(title, lead, items, bg):
 '''
 
 
+def set_hero(hero, title=None, thumbs=None, badge=None, perk3=None):
+    """A案ヒーローの見出し・写真・右上バッジ・3つ目の特典を差し替える。"""
+    if title:
+        hero, n = re.subn(r'(<span data-hero-title[^>]*>).*?(</span>)', lambda m: m.group(1) + title + m.group(2), hero, count=1, flags=re.S)
+        assert n == 1
+    if thumbs is not None:
+        hero, n = re.subn(r'(<div data-hero-thumbs[^>]*>).*?(</div>)', lambda m: m.group(1) + thumbs + m.group(2), hero, count=1, flags=re.S)
+        assert n == 1
+    if badge is not None:
+        hero, n = re.subn(r'<span data-hero-badge.*?</span></span></span>', badge, hero, count=1, flags=re.S)
+        assert n == 1
+    if perk3:
+        old = '<b style="display: block; font-size: 13px">査定<br>0円</b><span style="font-size: 10px">断っても無料</span>'
+        hero = rep(hero, old, f'<b style="display: block; font-size: 13px">{perk3[0]}</b><span style="font-size: 10px">{perk3[1]}</span>')
+    return hero
+
+
+def thumb(bid, alt):
+    return (f'<img src="/_blob/{bid}" alt="{alt}" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; '
+            'border: 2px solid #e9c46a; box-shadow: 0 4px 12px rgba(0,0,0,0.5)">')
+
+
+R1, R2, R3, R4, R5 = ('dc532101ae32abd39e568b5cdb87f2c0', 'b12599dada3ed5a0e840166d7a3a2879', '4403c5a8ccdc56c42f1597ee1418950b',
+                      '42778c475582aac16dfa0b980ee1de58', 'c6e314b32bc74917dc7f993a769d7822')
+
+
 ORDER_TAIL = ['最新情報', '概要文', '買取の流れ', '基本情報', '買取品目', '買取方法', '写真', '質問と回答', 'クチコミ導線']
-HERO_EYEBROW = '<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: #ffd1de">金・プラチナ／ブランド品／腕時計</span>'
 PHONE_EXAMPLE = '「金の指輪が2つ」「ヴィトンのバッグ」など、品物を伝えるだけ。'
 
 
@@ -71,7 +96,9 @@ def gold(V, tpl):
     ]
     head, blocks = split(tpl)
     b = dict(blocks)
-    b['カバー写真'] = rep(b['カバー写真'], HERO_EYEBROW, HERO_EYEBROW.replace('金・プラチナ／ブランド品／腕時計', '金・プラチナ・貴金属の買取'))
+    b['カバー写真'] = set_hero(b['カバー写真'], title='金・プラチナ<br>高価買取',
+                            thumbs=thumb(R1, '金貨＆銀貨の買取実績') + thumb(R2, '喜平ネックレスの買取実績') + thumb(R3, '純銀小判の買取実績') + thumb(R5, 'プラチナのバングルとリングの買取実績'),
+                            perk3=('壊れて<br>いてもOK', '重さで査定'))
     b['電話の訴求'] = rep(b['電話の訴求'], PHONE_EXAMPLE, '「18金の指輪が2つ」「喜平ネックレス」など、品物を伝えるだけ。')
     extra = {'こんな物でも売れます': okish(
         'こんな金・プラチナも、お値段がつきます', '重さで査定するので、壊れていても大丈夫です。',
@@ -81,7 +108,7 @@ def gold(V, tpl):
     order = ['カバー写真', '店名', 'アクションボタン', '電話の訴求', 'タブ', '相場', '買取実績', 'こんな物でも売れます'] + ORDER_TAIL + ['下部固定ボタン']
     out = join(head, list(b.items()), order, extra)
     return ('gold', v, out,
-            '他店に負けない高価買取に挑戦中｜高崎市の金・プラチナ買取 さすがや高崎飯塚店',
+            '金・プラチナ 高価買取｜高崎市の買取専門店さすがや高崎飯塚店',
             '高崎市飯塚町、コメダ珈琲の向かいの買取専門店。金・プラチナの指輪・ネックレス・喜平・金貨を重さで査定し、その場で現金化。'
             '壊れていてもOK、査定だけでも無料。今日の金相場と目安の計算機も掲載。駐車場6台、定休日なし。')
 
@@ -98,13 +125,12 @@ def brand(V, tpl):
     ]
     head, blocks = split(tpl)
     b = dict(blocks)
-    hero = rep(b['カバー写真'], HERO_EYEBROW, HERO_EYEBROW.replace('金・プラチナ／ブランド品／腕時計', 'ブランド品・腕時計の買取'))
-    hero = re.sub(r'<span style="display: flex; flex-direction: column; align-items: flex-end; background: #fff7e0;.*?</span></span></span>',
-                  '<span style="display: flex; flex-direction: column; align-items: flex-end; background: #ffffff; border: 2px solid #fbbc04; color: #202124; padding: 4px 10px; border-radius: 10px; line-height: 1.25">'
-                  '<span style="font-size: 10px; font-weight: 700">Googleクチコミ</span><span style="font-size: 16px; font-weight: 700"><span style="color: #fbbc04">★</span>{{rating}}</span></span>',
-                  hero, count=1, flags=re.S)
-    assert 'Googleクチコミ' in hero
-    b['カバー写真'] = hero
+    names = ''.join(f'<span style="display: flex; align-items: center; justify-content: center; text-align: center; aspect-ratio: 1 / 1; border-radius: 10px; border: 1px solid #e9c46a; background: rgba(255,255,255,0.04); font-family: \'Noto Serif JP\', serif; font-size: 12px; font-weight: 700; color: #f7e3a6; line-height: 1.3">{n}</span>'
+                    for n in ['エルメス', 'ルイ・<br>ヴィトン', 'ロレックス'])
+    badge = ('<span style="display: flex; flex-direction: column; align-items: flex-end; flex: none; border: 1px solid #e9c46a; color: #f7e3a6; padding: 3px 8px; border-radius: 8px; line-height: 1.25">'
+             '<span style="font-size: 10px; font-weight: 700">Googleクチコミ</span><span style="font-size: 15px; font-weight: 700"><span style="color: #fbbc04">★</span>{{rating}}</span></span>')
+    b['カバー写真'] = set_hero(b['カバー写真'], title='ブランド品・腕時計<br>高価買取', thumbs=thumb(R4, 'シャネルの財布の買取実績') + names,
+                            badge=badge, perk3=('箱・保証書<br>なしもOK', 'ご相談ください'))
     b['電話の訴求'] = rep(b['電話の訴求'], PHONE_EXAMPLE, '「ヴィトンの長財布」「シャネルのバッグ」など、ブランド名と品物を伝えるだけ。')
     brands = [('エルメス', 'バッグ・財布・小物'), ('ルイ・ヴィトン', 'バッグ・財布・小物'), ('シャネル', 'バッグ・財布・アクセサリー'),
               ('ロレックス', '腕時計'), ('オメガ', '腕時計'), ('グランドセイコー', '腕時計')]
@@ -130,7 +156,7 @@ def brand(V, tpl):
     order = ['カバー写真', '店名', 'アクションボタン', '電話の訴求', 'タブ', 'ブランド', '買取実績', 'こんな物でも売れます'] + ORDER_TAIL + ['相場', '下部固定ボタン']
     out = join(head, list(b.items()), order, extra)
     return ('brand', v, out,
-            '他店に負けない高価買取に挑戦中｜高崎市のブランド品・腕時計買取 さすがや高崎飯塚店',
+            'ブランド品・腕時計 高価買取｜高崎市の買取専門店さすがや高崎飯塚店',
             '高崎市飯塚町、コメダ珈琲の向かいの買取専門店。エルメス・ルイ・ヴィトン・シャネルのバッグや財布、ロレックスなどの腕時計を査定無料でその場で現金化。'
             '箱や保証書がなくてもご相談ください。駐車場6台、定休日なし。')
 
