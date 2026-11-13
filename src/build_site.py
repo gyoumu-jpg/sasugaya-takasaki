@@ -79,6 +79,18 @@ def render_body(V, template=TEMPLATE, prefix=''):
     # live open/closed status instead of a fixed 「営業中」
     body = body.replace('font-weight: 500">営業中</span>', 'font-weight: 500" data-open>営業中</span>')
     body = body.replace(' · 18:00 に営業終了 · 定休日なし', ' <span data-open-note>· 18:00 に営業終了</span> · 定休日なし')
+    # 色をトップ（黒×ゴールド）に合わせる：Googleマップ風の青をゴールド系に置き換える
+    for a, b2 in [
+        ('background: #1a73e8; color: #ffffff', 'background: linear-gradient(180deg, #f7dd8c, #d4a73c); color: #3b2604'),
+        ('background: #1a73e8', 'background: #b8862b'),
+        ('border-bottom: 3px solid #1a73e8', 'border-bottom: 3px solid #b8862b'),
+        ('color: #1a73e8', 'color: #8a5f10'),
+        ('stroke="#1a73e8"', 'stroke="#b8862b"'),
+        ('#e8f0fe', '#fbf3e0'),
+        ('#174ea6', '#6b4a07'),
+        ('border: 1px solid #dadce0; color: #8a5f10', 'border: 1px solid #d9c08a; color: #8a5f10'),
+    ]:
+        body = body.replace(a, b2)
     # mark CTA links for conversion tracking
     body = re.sub(r'<a href="tel:', '<a data-cv="tel" href="tel:', body)
     body = re.sub(r'<a href="https://lin\.ee/', '<a data-cv="line" href="https://lin.ee/', body)
@@ -145,8 +157,8 @@ def make_page(body, title, desc, url):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@700;900&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
-body{{margin:0;background:#f1f3f4}}
-a{{color:#1a73e8}}a:hover{{color:#174ea6}}
+body{{margin:0;background:#efe9dc}}
+a{{color:#8a5f10}}a:hover{{color:#6b4a07}}
 img{{max-width:100%}}
 </style>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
