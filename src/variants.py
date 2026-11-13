@@ -97,8 +97,10 @@ def gold(V, tpl):
     head, blocks = split(tpl)
     b = dict(blocks)
     b['カバー写真'] = set_hero(b['カバー写真'], title='金・銀<br>高価買取',
-                            thumbs=thumb(R1, '金貨＆銀貨の買取実績') + thumb(R2, '喜平ネックレスの買取実績') + thumb(R3, '純銀小判の買取実績') + thumb(R5, 'プラチナのバングルとリングの買取実績'),
+                            thumbs=thumb(R1, '金貨＆銀貨の買取実績') + thumb(R2, '喜平ネックレスの買取実績') + thumb(R3, '純銀小判の買取実績') + '<img src="../img/hq-silvercoin.jpg" alt="銀貨（イメージ）" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 2px solid #e9c46a; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.5)">',
                             perk3=('壊れて<br>いてもOK', '重さで査定'))
+    b['カバー写真'] = rep(b['カバー写真'], '予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで',
+                         '※写真の一部はイメージです。予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで')
     b['電話の訴求'] = rep(b['電話の訴求'], PHONE_EXAMPLE, '「18金の指輪が2つ」「喜平ネックレス」など、品物を伝えるだけ。')
     extra = {'こんな物でも売れます': okish(
         'こんな金・銀・プラチナも、お値段がつきます', '重さで査定するので、壊れていても大丈夫です。',
@@ -137,13 +139,16 @@ def brand(V, tpl):
     tile = lambda ic, n: ('<span style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; aspect-ratio: 1 / 1; '
                           'border-radius: 10px; border: 1px solid #e9c46a; background: radial-gradient(circle at 50% 35%, rgba(243,207,115,0.18), rgba(255,255,255,0.02) 70%)">'
                           f'{icons[ic]}<span style="font-family: \'Noto Serif JP\', serif; font-size: 11px; font-weight: 700; color: #f7e3a6; line-height: 1.2; text-align: center">{n}</span></span>')
-    names = tile('bag', 'エルメス') + tile('wallet', 'ルイ・<br>ヴィトン') + tile('watch', 'ロレックス')
+    def hq(file, alt):
+        return (f'<img src="../img/{file}" alt="{alt}（イメージ）" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; '
+                'border: 2px solid #e9c46a; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.5)">')
+    names = hq('hq-hermes.jpg', 'エルメスのバッグ') + hq('hq-vuitton.jpg', 'ルイ・ヴィトンのバッグ') + hq('hq-rolex.jpg', 'ロレックスの腕時計')
     badge = ('<span style="display: flex; flex-direction: column; align-items: flex-end; flex: none; border: 1px solid #e9c46a; color: #f7e3a6; padding: 3px 8px; border-radius: 8px; line-height: 1.25">'
              '<span style="font-size: 10px; font-weight: 700">Googleクチコミ</span><span style="font-size: 15px; font-weight: 700"><span style="color: #fbbc04">★</span>{{rating}}</span></span>')
     b['カバー写真'] = set_hero(b['カバー写真'], title='ブランド品・腕時計<br>高価買取', thumbs=thumb(R4, 'シャネルの財布の買取実績') + names,
                             badge=badge, perk3=('箱・保証書<br>なしもOK', 'ご相談ください'))
     b['カバー写真'] = rep(b['カバー写真'], '予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで',
-                         '※ブランド名の絵はイメージです。予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで')
+                         '※写真の一部はイメージです。予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで')
     b['電話の訴求'] = rep(b['電話の訴求'], PHONE_EXAMPLE, '「ヴィトンの長財布」「シャネルのバッグ」など、ブランド名と品物を伝えるだけ。')
     brands = [('エルメス', 'バッグ・財布・小物'), ('ルイ・ヴィトン', 'バッグ・財布・小物'), ('シャネル', 'バッグ・財布・アクセサリー'),
               ('ロレックス', '腕時計'), ('オメガ', '腕時計'), ('グランドセイコー', '腕時計')]
