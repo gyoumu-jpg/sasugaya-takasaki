@@ -96,11 +96,13 @@ def gold(V, tpl):
     ]
     head, blocks = split(tpl)
     b = dict(blocks)
-    b['カバー写真'] = set_hero(b['カバー写真'], title='金・銀<br>高価買取',
-                            thumbs=thumb(R1, '金貨＆銀貨の買取実績') + thumb(R2, '喜平ネックレスの買取実績') + thumb(R3, '純銀小判の買取実績') + '<img src="../img/hq-silvercoin.jpg" alt="銀貨（イメージ）" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 2px solid #e9c46a; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.5)">',
+    b['カバー写真'] = set_hero(b['カバー写真'], title='金・銀・プラチナ<br>高価買取',
+                            thumbs=thumb(R1, '金貨＆銀貨の買取実績') + thumb(R2, '喜平ネックレスの買取実績') + thumb(R3, '純銀小判の買取実績') + '<img src="../img/hq-silvercoin.jpg" alt="銀貨（イメージ）" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 2px solid #e9c46a; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.5)">' + thumb(R5, 'プラチナのバングルとリングの買取実績'),
                             perk3=('壊れて<br>いてもOK', '重さで査定'))
     b['カバー写真'] = rep(b['カバー写真'], '予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで',
                          '※写真の一部はイメージです。予約不要・駐車場6台・定休日なし ／ コメダ特典は2026年12月末まで')
+    b['カバー写真'] = rep(b['カバー写真'], '<div data-hero-thumbs style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">',
+                         '<div data-hero-thumbs style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px">')
     b['電話の訴求'] = rep(b['電話の訴求'], PHONE_EXAMPLE, '「18金の指輪が2つ」「喜平ネックレス」など、品物を伝えるだけ。')
     extra = {'こんな物でも売れます': okish(
         'こんな金・銀・プラチナも、お値段がつきます', '重さで査定するので、壊れていても大丈夫です。',
@@ -110,7 +112,7 @@ def gold(V, tpl):
     order = ['カバー写真', '店名', 'アクションボタン', '電話の訴求', 'タブ', '相場', '買取実績', 'こんな物でも売れます'] + ORDER_TAIL + ['下部固定ボタン']
     out = join(head, list(b.items()), order, extra)
     return ('gold', v, out,
-            '金・銀 高価買取｜高崎市の買取専門店さすがや高崎飯塚店',
+            '金・銀・プラチナ 高価買取｜高崎市の買取専門店さすがや高崎飯塚店',
             '高崎市飯塚町、コメダ珈琲の向かいの買取専門店。金・銀・プラチナの指輪・ネックレス・喜平・金貨・銀貨を重さで査定し、その場で現金化。'
             '壊れていてもOK、査定だけでも無料。今日の金相場と目安の計算機も掲載。駐車場6台、定休日なし。')
 
